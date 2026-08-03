@@ -32,21 +32,47 @@ archivo de rutas). Sin argumentos, trabaja sobre todos los Requerimientos del pr
 
 ---
 
-## 0. Credenciales
+## 0. Identidad y credenciales
 
 - `SCRUM_API_KEY` — variable de entorno, para la cuenta con rol Tester o QA. Si falta,
   explicar que el Project Manager la genera desde "Usuarios Activos" en la app, y parar.
   **Nunca** escribir esta key a ningún archivo del repo.
-- `SCRUM_API_URL` — variable de entorno con la base (ej. `https://scrum.tudominio.com`).
+- `SCRUM_API_URL` — la base de la instancia (ej. `https://scrum.tudominio.com`). **No es
+  secreta y no hay que preguntarla todavía**: se resuelve en el paso 1 leyendo el manifest
+  del repo. Sólo si el manifest tampoco la tiene se llega a pedírsela al usuario.
 
 Todas las llamadas llevan `-H "Authorization: Bearer $SCRUM_API_KEY"`. Si `$SCRUM_API_URL`
 tiene un `/` final, quitarlo antes de concatenar rutas.
 
 ## 1. Leer o inicializar el manifest de trazabilidad
 
-Leer `docs/scrum-manifest.json` (el mismo que usa `/scrum-sync`, sólo para el `projectId`
-— no tocar sus `mappings`, son del developer). Si no existe o no tiene `projectId`,
-preguntarle al usuario el ID del proyecto.
+Leer `docs/scrum-manifest.json` (el mismo que usa `/scrum-sync`, sólo para `apiUrl` y
+`projectId` — no tocar sus `mappings`, son del developer). Si no existe, crearlo con el
+mismo formato que usa `/scrum-sync` (`apiUrl`, `projectId`, `lastSyncAt`, `mappings`).
+
+- **`apiUrl`**: no es secreta — si el archivo ya la trae, usarla y no volver a preguntar;
+  si falta, antes de preguntarla revisar si existe `docs/SCRUM_MASTER_AI.md` (el Project
+  Manager la publica ahí ya resuelta) y usar ese valor si está. Sólo si tampoco está ahí,
+  preguntarla, guardarla acá y sugerir commitear el archivo.
+- **`projectId`**: si falta, no preguntarlo a ciegas — se resuelve en el paso 1.5 contra
+  los proyectos que devuelve `/api/v1/me`.
+
+## 1.5. Confirmar identidad y rol
+
+```bash
+curl -s "$SCRUM_API_URL/api/v1/me" -H "Authorization: Bearer $SCRUM_API_KEY"
+```
+
+- `401` → la key es inválida o fue revocada. Avisar que se la pidan de nuevo al Project
+  Manager, y parar.
+- `200` → `{ id, username, email, role, projects: [{ id, name }, ...] }` — esto determina
+  el rol de verdad, **nunca preguntarle al usuario "qué rol sos" ni asumirlo**.
+  - Si `role` no es `tester` ni `qa`, avisar que esta key no corresponde a este skill
+    (`/po-sync` es para `product_owner`, `/scrum-sync` para `developer`) y sugerir el
+    correcto.
+  - Si el manifest no tenía `projectId`: un solo elemento en `projects` → usarlo directo;
+    varios → listar y preguntar; vacío → avisar que el Project Manager todavía no agregó
+    a este usuario a ningún proyecto, y parar. Guardar el elegido en el manifest.
 
 ## 2. Traer los Requerimientos existentes
 
