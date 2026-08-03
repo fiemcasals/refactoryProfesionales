@@ -31,14 +31,15 @@ default a `docs/requerimientos-po.md`.
 
 ---
 
-## 0. Credenciales
+## 0. Identidad y credenciales
 
 - `SCRUM_API_KEY` — variable de entorno. Si no está seteada: explicar que el Project
   Manager la genera desde "Usuarios Activos" en la app para la cuenta con rol Product
   Owner, y que hay que exportarla (`export SCRUM_API_KEY=sk_...`). Parar acá si falta.
   **Nunca** escribir esta key a ningún archivo del repo.
-- `SCRUM_API_URL` — variable de entorno con la base (ej. `https://scrum.tudominio.com`).
-  Si no está seteada, preguntar cuál es y sugerir agregarla al shell profile.
+- `SCRUM_API_URL` — la base de la instancia (ej. `https://scrum.tudominio.com`). **No es
+  secreta y no hay que preguntarla todavía**: se resuelve en el paso 1 leyendo el
+  manifest del repo. Sólo si el manifest tampoco la tiene se llega a pedírsela al usuario.
 
 Todas las llamadas llevan `-H "Authorization: Bearer $SCRUM_API_KEY"`. Si `$SCRUM_API_URL`
 tiene un `/` final, quitarlo antes de concatenar rutas.
@@ -47,22 +48,51 @@ tiene un `/` final, quitarlo antes de concatenar rutas.
 
 Leer `docs/po-manifest.json` en la raíz del repo (es propio de este skill, no el mismo que
 usa `/scrum-sync` para developer — ese guarda referencias a código; este guarda
-referencias a secciones de este documento). Si no existe, o no tiene `projectId`,
-preguntarle al usuario el ID del proyecto y crear:
+referencias a secciones de este documento). Si no existe, crear:
 
 ```json
 {
-  "projectId": "PROJ-...",
+  "apiUrl": null,
+  "projectId": null,
   "lastSyncAt": null,
   "mappings": []
 }
 ```
 
+- **`apiUrl`**: no es secreta — vive commiteada en el repo. Si el archivo ya la trae,
+  usarla tal cual y no volver a preguntar. Si falta, antes de preguntarle nada al usuario,
+  revisar si existe `docs/SCRUM_MASTER_AI.md` — el Project Manager la publica ahí ya
+  resuelta (el servidor la saca sola de su propia URL pública); si está, usar ese valor.
+  Sólo si ninguna de las dos fuentes la tiene, preguntarle la URL al usuario. En cualquier
+  caso, guardarla en el manifest para que el resto del equipo no tenga que repetirla.
+- **`projectId`**: si falta, no preguntarlo a ciegas todavía — se resuelve en el paso 1.5
+  contra los proyectos que devuelve `/api/v1/me`.
+
 Cada entrada de `mappings` es `{ requirementId, userStoryId, sourceRef }`, donde
 `sourceRef` es una referencia corta a la sección del documento que originó ese
 Requerimiento (ej. `docs/requerimientos-po.md#Alta de turno`) — sirve para que una
 relectura futura sepa si ya se sincronizó algo y actualizarlo en vez de duplicarlo.
-Recomendarle al usuario commitear este archivo (no tiene secretos, sólo IDs).
+Recomendarle al usuario commitear este archivo (no tiene secretos, sólo IDs y la URL).
+
+## 1.5. Confirmar identidad y rol
+
+```bash
+curl -s "$SCRUM_API_URL/api/v1/me" -H "Authorization: Bearer $SCRUM_API_KEY"
+```
+
+- `401` → la key es inválida o fue revocada. Avisar que se la pidan de nuevo al Project
+  Manager, y parar.
+- `200` → `{ id, username, email, role, projects: [{ id, name }, ...] }`. Esto es lo que
+  determina el rol de verdad — **nunca preguntarle al usuario "qué rol sos" ni asumirlo**;
+  el rol de la cuenta dueña de la key es el único que importa (y la API lo vuelve a
+  validar en cada llamada de todos modos).
+  - Si `role` no es `product_owner` ni `project_manager`, avisar que esta key no
+    corresponde a este skill (`/scrum-sync` es para `developer`, `/qa-sync` para
+    `tester`/`qa`) y sugerir el correcto en vez de seguir adelante.
+  - Si el manifest no tenía `projectId`: con un solo elemento en `projects`, usar ese `id`
+    directo; con varios, listarlos y preguntar cuál; vacío, avisar que el Project Manager
+    todavía no agregó a este usuario a ningún proyecto, y parar. Guardar el `projectId`
+    elegido en el manifest.
 
 ## 2. Traer Historias de Usuario y Requerimientos existentes
 
