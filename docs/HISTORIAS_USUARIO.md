@@ -1,6 +1,6 @@
 # Historias de Usuario -- Profesionales
 
-_Generado automaticamente el 2026-07-31T15:44:03.040Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-08-03T14:27:17.409Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: IGU
 
