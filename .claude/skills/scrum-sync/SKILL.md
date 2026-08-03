@@ -35,36 +35,68 @@ Argumentos: `$ARGUMENTS`. Dos formas:
 
 ---
 
-## 0. Credenciales (aplica a las dos formas)
+## 0. Identidad y credenciales (aplica a las dos formas)
 
 - `SCRUM_API_KEY` — variable de entorno. Si no está seteada: explicar que hay que
   pedírsela al admin del proyecto (la genera desde "Gestión de Accesos" en la app) y
   exportarla en el shell (`export SCRUM_API_KEY=sk_...`), y parar acá. **Nunca** escribir
   esta key a ningún archivo del repo.
-- `SCRUM_API_URL` — variable de entorno con la base, ej. `https://scrum.tudominio.com`.
-  Si no está seteada, preguntar cuál es y sugerir agregarla al shell profile
-  (`export SCRUM_API_URL=...`) para no tener que repetirlo.
+- `SCRUM_API_URL` — la base de la instancia (ej. `https://scrum.tudominio.com`). **No
+  es secreta y no hay que preguntarla todavía**: se resuelve en el paso 1 leyendo el
+  manifest del repo. Sólo si el manifest tampoco la tiene se llega a pedírsela al
+  usuario.
 
 Todas las llamadas a la API llevan `-H "Authorization: Bearer $SCRUM_API_KEY"`.
 
 ## 1. Leer o inicializar el manifest (aplica a las dos formas)
 
-Leer `docs/scrum-manifest.json` en la raíz del repo. Si no existe, o existe pero no
-tiene `projectId`, preguntarle al usuario el ID del proyecto (se lo pasa el admin junto
-con la key) y crear el archivo:
+Leer `docs/scrum-manifest.json` en la raíz del repo. Si no existe, crearlo:
 
 ```json
 {
-  "projectId": "PROJ-...",
+  "apiUrl": null,
+  "projectId": null,
   "lastSyncAt": null,
   "mappings": []
 }
 ```
 
+- **`apiUrl`**: a diferencia de la key, no es secreta — vive commiteada en el repo.
+  Si el archivo ya la trae, usarla tal cual y no volver a preguntar. Si falta, antes de
+  preguntarle nada al usuario, revisar si existe `docs/SCRUM_MASTER_AI.md` — el Project
+  Manager la publica ahí ya resuelta (`SCRUM_API_URL es <url>`) porque el servidor la saca
+  sola de su propia URL pública; si está, usar ese valor. Sólo si ninguna de las dos
+  fuentes la tiene, preguntarle la URL al usuario. En cualquier caso, guardarla en el
+  manifest para que el resto del equipo (developer/PO/QA que clonen este mismo repo) no
+  tenga que repetirla nunca.
+- **`projectId`**: si falta, no preguntarlo a ciegas todavía — se resuelve en el paso 1.5
+  contra los proyectos que devuelve `/api/v1/me`.
+
 Este archivo es el estado de trazabilidad — no decide qué existe (eso ya lo sabe la API,
 los Requerimientos los crea el Project Manager), pero guarda `sourceRef` para que una
 relectura futura entienda por qué se marcó cubierto cada Requerimiento. Recomendarle al
-usuario commitearlo al repo (no tiene secretos, sólo IDs).
+usuario commitearlo al repo (no tiene secretos, sólo IDs y la URL).
+
+## 1.5. Confirmar identidad y rol (aplica a las dos formas)
+
+```bash
+curl -s "$SCRUM_API_URL/api/v1/me" -H "Authorization: Bearer $SCRUM_API_KEY"
+```
+
+- `401` → la key es inválida o fue revocada. Avisar al usuario que le pida al admin que
+  le genere una nueva, y parar.
+- `200` → `{ id, username, email, role, projects: [{ id, name }, ...] }`. Esto es lo que
+  determina el rol de verdad — **nunca preguntarle al usuario "qué rol sos" ni asumirlo**,
+  el rol de la cuenta dueña de la key es el único que importa (y la API lo vuelve a
+  validar en cada llamada de todos modos, así que confiar en otra cosa acá no cambiaría
+  nada salvo dar un error más tarde y más confuso).
+  - Si `role` no es `developer` ni `project_manager`, avisar que esta key no corresponde a
+    este skill (`/po-sync` es para `product_owner`, `/qa-sync` para `tester`/`qa`) y
+    sugerir el skill correcto en vez de seguir adelante.
+  - Si el manifest no tenía `projectId`: si `projects` trae un solo elemento, usar ese
+    `id` directamente sin preguntar; si trae varios, listarlos y preguntar cuál; si viene
+    vacío, avisar que el Project Manager todavía no agregó a este usuario a ningún
+    proyecto, y parar. Guardar el `projectId` elegido en el manifest.
 
 ---
 
