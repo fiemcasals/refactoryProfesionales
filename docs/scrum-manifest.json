@@ -1,0 +1,43 @@
+{
+  "apiUrl": "https://scrum.misitiowebpersonal.com.ar",
+  "projectId": "PROJ-1785509638361",
+  "lastSyncAt": "2026-08-04T09:14:00.000Z",
+  "mappings": [
+    {
+      "requirementId": "REQ-1785771199977",
+      "code": "RF-01",
+      "sourceRef": "docs/REQUERIMIENTOS.md#RF-01",
+      "testIds": []
+    },
+    {
+      "requirementId": "REQ-1785771214462",
+      "code": "RF-04",
+      "sourceRef": "docs/REQUERIMIENTOS.md#RF-04",
+      "testIds": []
+    },
+    {
+      "requirementId": "REQ-1785771214528",
+      "code": "RF-05",
+      "sourceRef": "docs/REQUERIMIENTOS.md#RF-05",
+      "testIds": []
+    },
+    {
+      "requirementId": "REQ-1785771214393",
+      "code": "RF-03",
+      "sourceRef": "docs/REQUERIMIENTOS.md#RF-03",
+      "testIds": []
+    },
+    {
+      "requirementId": "REQ-1785771214294",
+      "code": "RF-02",
+      "sourceRef": "docs/REQUERIMIENTOS.md#RF-02",
+      "testIds": []
+    },
+    {
+      "requirementId": "REQ-1785771214595",
+      "code": "RNF-01",
+      "sourceRef": "docs/REQUERIMIENTOS.md#RNF-01",
+      "testIds": []
+    }
+  ]
+}
