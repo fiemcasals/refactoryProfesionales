@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "requirementCode": "RF-01",
+      "title": "Carga de interfaz gráfica de chat y bienvenida con botones interactivos",
+      "type": "E2E",
+      "preconditions": "Acceder a la URL de la plataforma",
+      "expectedResult": "Se muestra la interfaz en formato chat, saluda con mensaje de bienvenida y despliega botones de Iniciar Sesión y Registrarse.",
+      "steps": [
+        {
+          "name": "cargar_interfaz",
+          "method": "GET",
+          "url": "{{baseUrl}}/",
+          "expectedStatus": 200
+        }
+      ]
+    }
+  ]
+}

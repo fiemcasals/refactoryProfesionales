@@ -1,13 +1,13 @@
 {
   "apiUrl": "https://scrum.misitiowebpersonal.com.ar",
   "projectId": "PROJ-1785509638361",
-  "lastSyncAt": "2026-08-04T09:14:00.000Z",
+  "lastSyncAt": "2026-08-04T09:45:00.000Z",
   "mappings": [
     {
       "requirementId": "REQ-1785771199977",
       "code": "RF-01",
-      "sourceRef": "docs/REQUERIMIENTOS.md#RF-01",
-      "testIds": []
+      "sourceRef": "index.html#chat-container",
+      "testIds": ["TEST-1785847507338"]
     },
     {
       "requirementId": "REQ-1785771214462",
