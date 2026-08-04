@@ -1,7 +1,8 @@
 {
   "apiUrl": "https://scrum.misitiowebpersonal.com.ar",
+  "baseUrl": "http://10.24.206.203:8080",
   "projectId": "PROJ-1785509638361",
-  "lastSyncAt": "2026-08-04T10:55:00.000Z",
+  "lastSyncAt": "2026-08-04T11:07:00.000Z",
   "mappings": [
     {
       "requirementId": "REQ-1785771199977",
