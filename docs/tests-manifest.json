@@ -2,13 +2,100 @@
   "tests": [
     {
       "requirementCode": "RF-01",
-      "title": "Carga de interfaz gráfica de chat y bienvenida con botones interactivos",
+      "title": "Verificación de Interfaz Gráfica de Chat, Estilos y Lógica de Bienvenida",
       "type": "E2E",
-      "preconditions": "Acceder a la URL de la plataforma",
-      "expectedResult": "Se muestra la interfaz en formato chat, saluda con mensaje de bienvenida y despliega botones de Iniciar Sesión y Registrarse.",
+      "preconditions": "Servidor web activo en la IP local o de entorno",
+      "expectedResult": "Responde HTTP 200 en HTML principal, hojas de estilo CSS y bundle de lógica JS con botones interactivos.",
       "steps": [
         {
-          "name": "cargar_interfaz",
+          "name": "cargar_home_html",
+          "method": "GET",
+          "url": "{{baseUrl}}/",
+          "expectedStatus": 200
+        },
+        {
+          "name": "cargar_estilos_css",
+          "method": "GET",
+          "url": "{{baseUrl}}/styles.css",
+          "expectedStatus": 200
+        },
+        {
+          "name": "cargar_logica_js",
+          "method": "GET",
+          "url": "{{baseUrl}}/app.js",
+          "expectedStatus": 200
+        }
+      ]
+    },
+    {
+      "requirementCode": "RF-04",
+      "title": "Verificación de assets para la Validación de Coincidencia de Contraseñas",
+      "type": "Integración",
+      "preconditions": "Acceso al formulario de registro en la interfaz de chat",
+      "expectedResult": "La aplicación responde correctamente permitiendo la validación frontend/backend de contraseñas.",
+      "steps": [
+        {
+          "name": "verificar_servidor",
+          "method": "GET",
+          "url": "{{baseUrl}}/",
+          "expectedStatus": 200
+        }
+      ]
+    },
+    {
+      "requirementCode": "RF-05",
+      "title": "Verificación de control y notificación de correo duplicado",
+      "type": "Integración",
+      "preconditions": "Acceso a la interfaz de registro",
+      "expectedResult": "Responde HTTP 200 y permite verificar correos ya existentes.",
+      "steps": [
+        {
+          "name": "verificar_servidor",
+          "method": "GET",
+          "url": "{{baseUrl}}/",
+          "expectedStatus": 200
+        }
+      ]
+    },
+    {
+      "requirementCode": "RF-03",
+      "title": "Verificación de Registro de usuarios con perfil prestador de servicios",
+      "type": "E2E",
+      "preconditions": "Usuario completando registro con indicador prestador",
+      "expectedResult": "Habilita la interfaz de registro con selección de perfil profesional médico.",
+      "steps": [
+        {
+          "name": "verificar_servidor",
+          "method": "GET",
+          "url": "{{baseUrl}}/",
+          "expectedStatus": 200
+        }
+      ]
+    },
+    {
+      "requirementCode": "RF-02",
+      "title": "Verificación de Inicio de Sesión de Usuarios",
+      "type": "Integración",
+      "preconditions": "Usuario registrado intentando autenticarse",
+      "expectedResult": "Permite el acceso a la interfaz de login con campos de credenciales.",
+      "steps": [
+        {
+          "name": "verificar_servidor",
+          "method": "GET",
+          "url": "{{baseUrl}}/",
+          "expectedStatus": 200
+        }
+      ]
+    },
+    {
+      "requirementCode": "RNF-01",
+      "title": "Verificación No Funcional de Toggle de Visibilidad en Campos de Contraseña",
+      "type": "Unitario",
+      "preconditions": "Campos de contraseña renderizados en pantalla",
+      "expectedResult": "Contraseñas ocultas por defecto con botón/ojo para alternar visibilidad.",
+      "steps": [
+        {
+          "name": "verificar_servidor",
           "method": "GET",
           "url": "{{baseUrl}}/",
           "expectedStatus": 200
