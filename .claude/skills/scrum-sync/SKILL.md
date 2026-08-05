@@ -1,6 +1,6 @@
 ---
 name: scrum-sync
-description: Sincroniza lo implementado en este repo con los Requerimientos de un proyecto en Scrum Master AI — lee la documentación local, decide con criterio qué requerimientos quedaron cubiertos, y actualiza esos Requerimientos y sus Tests vía la API. También puede decidir sola cuál es el siguiente Requerimiento a encarar leyendo el plan publicado en la rama principal, y dejar la rama/commit/push listos (el tiempo real trabajado se calcula solo, a partir de ahí: arranca con ese primer push y se congela al abrir el Pull Request — este skill no lo controla). Usar cuando el usuario pide "sincronizar con scrum", "reportar al scrum master", "actualizar requerimientos", "avisarle al scrum lo que hice", "qué sigue", o corre /scrum-sync explícitamente.
+description: Sincroniza lo implementado en este repo con los Requerimientos de un proyecto en Scrum Master AI — lee la documentación local, decide con criterio qué requerimientos quedaron cubiertos, y actualiza esos Requerimientos y sus Tests vía la API. Si algo documentado no matchea ningún Requerimiento existente, puede crear uno nuevo (developer o Project Manager, con confirmación explícita) colgado de la Historia de Usuario que corresponda. También puede decidir sola cuál es el siguiente Requerimiento a encarar leyendo el plan publicado en la rama principal, y dejar la rama/commit/push listos (el tiempo real trabajado se calcula solo, a partir de ahí: arranca con ese primer push y se congela al abrir el Pull Request — este skill no lo controla). Usar cuando el usuario pide "sincronizar con scrum", "reportar al scrum master", "actualizar requerimientos", "crear un requerimiento", "avisarle al scrum lo que hice", "qué sigue", o corre /scrum-sync explícitamente.
 user-invocable: true
 allowed-tools:
   - Read
@@ -17,8 +17,11 @@ Lee lo que este repo ya documenta como implementado, lo compara contra los Reque
 del proyecto en Scrum Master AI, y actualiza esos mismos Requerimientos/Tests vía la API
 `/api/v1/*` — para que el programador no tenga que reportar nada a mano. El Requerimiento
 es la unidad atómica (RF-01, RNF-01, etc.): no hay ningún nivel intermedio tipo
-"Funcionalidad" que crear — se actualiza el Requerimiento que ya existe. También puede
-decidir cuál es el siguiente Requerimiento a encarar.
+"Funcionalidad". La mayoría de las veces se actualiza un Requerimiento que ya existe (lo
+cargó el Product Owner); si algo documentado no matchea ninguno, este skill también puede
+crear el que falta (ver paso 4.5), colgado de la Historia de Usuario que corresponda, con
+confirmación explícita del usuario antes de cada alta. También puede decidir cuál es el
+siguiente Requerimiento a encarar.
 
 **El tiempo real trabajado (`real_time`) no lo controla este skill ni ningún botón manual.**
 Se calcula exclusivamente a partir de git: arranca en el primer push a la rama del
@@ -104,9 +107,11 @@ curl -s "$SCRUM_API_URL/api/v1/me" -H "Authorization: Bearer $SCRUM_API_KEY"
 
 ### Sin argumentos, o una ruta — sincronizar documentación
 
-#### 2. Traer los Requerimientos del proyecto
+#### 2. Traer las Historias de Usuario y los Requerimientos del proyecto
 
 ```bash
+curl -s "$SCRUM_API_URL/api/v1/projects/$PROJECT_ID/user-stories" \
+  -H "Authorization: Bearer $SCRUM_API_KEY"
 curl -s "$SCRUM_API_URL/api/v1/projects/$PROJECT_ID/requirements" \
   -H "Authorization: Bearer $SCRUM_API_KEY"
 ```
@@ -115,10 +120,12 @@ curl -s "$SCRUM_API_URL/api/v1/projects/$PROJECT_ID/requirements" \
   que le genere una nueva, y parar.
 - `403` → la key es válida pero el usuario dueño no pertenece a ese proyecto. Avisar
   que confirme el `projectId` con el admin, y parar.
-- `200` → array de `{ id, code, userStoryId, name, description, type, status, ... }`
-  (`type` es `funcional` o `no_funcional`; `status` es el estado Kanban actual:
-  `to_do`/`doing`/`testing`/`done`/`blocked`). Guardarlo en memoria, es la lista contra
-  la que se va a razonar en el paso siguiente.
+- `200` en ambas → Historias de Usuario trae `{ id, code, name, description,
+  acceptanceCriteria, ... }` (hace falta para el paso 4.5, si hay que crear un
+  Requerimiento nuevo). Requerimientos trae `{ id, code, userStoryId, name, description,
+  type, status, ... }` (`type` es `funcional` o `no_funcional`; `status` es el estado
+  Kanban actual: `to_do`/`doing`/`testing`/`done`/`blocked`). Guardar ambas listas en
+  memoria, son la base contra la que se va a razonar en el paso siguiente.
 
 #### 3. Leer la documentación local y decidir qué requerimiento cubre cada cosa
 
@@ -132,7 +139,10 @@ documentación como lo haría un humano familiarizado con el proyecto: entendé 
 funcionalidad describe cada sección/endpoint/feature documentado, y decidí — comparando
 contra la `description` de cada requerimiento, no sólo el `name` — cuáles quedaron
 cubiertos. Si tenés dudas razonables sobre un match, es preferible dejarlo afuera
-(reportarlo como "sin cobertura clara" en el resumen final) a inventar una relación.
+(reportarlo como "sin cobertura clara" en el resumen final) a inventar una relación —
+distinto es cuando estás razonablemente seguro de que no matchea ningún Requerimiento
+existente porque genuinamente no estaba trackeado: eso es candidato al paso 4.5, no
+"cobertura dudosa".
 
 Para cada match, quedate con una referencia corta a la fuente (`sourceRef`, ej.
 `docs/api.md#POST /login` o `README.md#Autenticación`) — se guarda en el manifest y
@@ -140,8 +150,8 @@ sirve para que una relectura futura entienda por qué se marcó cubierto.
 
 #### 4. Actualizar el Requerimiento cubierto
 
-Para cada requerimiento con match, actualizarlo directamente — nunca se crea nada nuevo,
-el Requerimiento ya existe (lo cargó el Project Manager):
+Para cada requerimiento con match, actualizarlo directamente (ya existe, normalmente
+lo cargó el Product Owner):
 
 ```bash
 curl -s -X PATCH "$SCRUM_API_URL/api/v1/requirements/$REQUIREMENT_ID" \
@@ -168,6 +178,36 @@ curl -s -X PATCH "$SCRUM_API_URL/api/v1/requirements/$REQUIREMENT_ID" \
   para lo que ya esté cubierto por ese archivo — dejarle el trabajo al paso 5, que es
   más rico (guarda los pasos de verificación, no sólo el nombre).
 
+#### 4.5. Crear un Requerimiento que no existe todavía (con confirmación explícita)
+
+Dos disparadores posibles:
+- Algo que la documentación describe con claridad no matchea ningún Requerimiento del
+  paso 2 -- genuinamente no estaba trackeado, no es un caso dudoso de cobertura.
+- El usuario pide directamente, en la conversación, crear un Requerimiento puntual (por
+  nombre/descripción), sin pasar por el flujo de sincronización de documentación.
+
+En cualquiera de los dos casos, antes de crear nada:
+
+1. **Resolver a qué Historia de Usuario cuelga**, comparando contra `name` +
+   `description` + `acceptanceCriteria` de las Historias del paso 2 (nunca por
+   coincidencia literal de texto). Si no hay ninguna Historia razonable, **no la
+   inventes** — avisar que hace falta que el Product Owner (o vos mismo, si tenés
+   permiso) cargue esa Historia primero, y no crear el Requerimiento suelto.
+2. **Confirmarle al usuario, antes de llamar a la API**: nombre propuesto, tipo
+   (`funcional`/`no_funcional`) y bajo qué Historia va a quedar. Esperar confirmación
+   explícita -- a diferencia de actualizar un Requerimiento existente (reversible con
+   otra corrida), crear uno de más ensucia el backlog y hay que borrarlo a mano después.
+3. Con la confirmación:
+   ```bash
+   curl -s -X POST "$SCRUM_API_URL/api/v1/user-stories/$USER_STORY_ID/requirements" \
+     -H "Authorization: Bearer $SCRUM_API_KEY" -H "Content-Type: application/json" \
+     -d '{"name":"...","description":"...","type":"funcional"}'
+   ```
+   - `403` → la cuenta no tiene permiso para crear (developer, product_owner y project
+     manager sí pueden; tester/qa no). Avisar tal cual y no reintentar.
+   - `201` → guardar en el manifest una entrada `{ requirementId, sourceRef, testIds: [] }`
+     igual que en el paso 4, para que una relectura futura no lo vuelva a crear.
+
 #### 5. Sincronizar `docs/tests-manifest.json` (tests de endpoint)
 
 Si el repo tiene `docs/tests-manifest.json`, es la fuente de tests de endpoint que el
@@ -183,6 +223,7 @@ tener que tipear URLs a mano. Formato:
       "title": "Alta de profesional",
       "type": "Integración",
       "preconditions": "Usuario autenticado con rol admin",
+      "description": "Autentica como admin, da de alta un profesional nuevo y confirma que se puede volver a leer.",
       "expectedResult": "Devuelve 201 y el profesional creado con id",
       "steps": [
         { "name": "crear", "method": "POST", "url": "{{baseUrl}}/api/professionals", "body": "{\"name\":\"Juan\"}", "expectedStatus": 201 },
@@ -197,30 +238,47 @@ tener que tipear URLs a mano. Formato:
   (por `code`, ej. `RF-03`, nunca por nombre). Si no matchea ninguno, dejarlo afuera y
   avisar en el resumen final — no crear el Requerimiento ni adivinar cuál es.
 - `type` usa los mismos valores que ya existen en la app: `Unitario`, `Integración`, `E2E`.
+- `description`: en prosa, el flujo que describe el test (qué hace y en qué orden) — es
+  el campo que la app muestra como "Descripción / Flujo de Ejecución" en cada test.
+  **Siempre completarlo** — no se infiere de `steps`, y si falta queda en blanco en la app.
 - `steps` es una lista de llamadas HTTP en orden (`name`, `method`, `url`, `body`
   opcional, `expectedStatus` opcional). Un paso puede reusar el resultado de uno anterior
   con `{{nombreDelPaso.campo}}` (o `{{nombreDelPaso.status}}`), y `{{now}}` da un valor
   único por corrida. **No resolver `{{baseUrl}}` acá ni pedirle la URL real al usuario**
   — lo resuelve la app cuando QA corre el test, contra la Base URL de verificación que el
   Project Manager ya configuró para el proyecto (este skill no necesita conocerla).
-- Si el manifest de trazabilidad (`docs/scrum-manifest.json`) ya tiene un `testId` para
-  esa combinación `requirementCode` + `title` de una corrida anterior, actualizar ese test
-  en vez de crear uno nuevo:
+- No confiar sólo en el `testId` de `docs/scrum-manifest.json` para saber si el test ya
+  existe — ese archivo puede faltar, no estar commiteado, o venir de otro clon. Antes de
+  crear, traer los tests que la API ya tiene registrados para este Requerimiento y
+  matchear por `title` exacto:
+  ```bash
+  curl -s "$SCRUM_API_URL/api/v1/requirements/$REQUIREMENT_ID/tests" \
+    -H "Authorization: Bearer $SCRUM_API_KEY"
+  ```
+- Si ya existe (por el manifest o por esa respuesta), actualizarlo en vez de crear uno
+  nuevo — con esto también se puede refrescar el contenido, no sólo los pasos, por si el
+  endpoint cambió desde la última corrida:
   ```bash
   curl -s -X PATCH "$SCRUM_API_URL/api/v1/tests/$TEST_ID" \
     -H "Authorization: Bearer $SCRUM_API_KEY" -H "Content-Type: application/json" \
-    -d '{"verification":{"steps":[...]}}'
+    -d '{"preconditions":"...","description":"...","expectedResult":"...","verification":{"steps":[...]}}'
   ```
-- Si no existe todavía, crearlo con una sola llamada (test + pasos juntos):
+- Si no existe en ninguna de las dos, crearlo con una sola llamada (test + pasos juntos,
+  **incluyendo siempre `description`**):
   ```bash
   curl -s -X POST "$SCRUM_API_URL/api/v1/requirements/$REQUIREMENT_ID/tests" \
     -H "Authorization: Bearer $SCRUM_API_KEY" -H "Content-Type: application/json" \
-    -d '{"title":"...","type":"Integración","preconditions":"...","expectedResult":"...","isAutoGenerated":true,"verification":{"steps":[...]}}'
+    -d '{"title":"...","type":"Integración","preconditions":"...","description":"...","expectedResult":"...","isAutoGenerated":true,"verification":{"steps":[...]}}'
   ```
-  y guardar el `id` devuelto en `testIds` de esa entrada del manifest de trazabilidad.
+  y guardar el `id` devuelto (o el que salió de la reconciliación) en `testIds` de esa
+  entrada del manifest de trazabilidad.
 - **Nunca mandar `status` en `Aprobado`/`Fallido` desde acá** — crear/actualizar deja el
   test en `Pendiente`; que alguien haya escrito los pasos no significa que ya se
   corrieron y se revisaron. Eso lo decide QA corriéndolos desde la app.
+- Si la reconciliación contra la API encuentra más de un test con el mismo `title` para el
+  mismo Requerimiento (duplicados de corridas viejas), no elegir uno a ciegas: reportarlo
+  en el resumen final para que QA decida cuál borrar
+  (`DELETE $SCRUM_API_URL/api/v1/tests/$TEST_ID`).
 
 #### 6. Guardar el manifest actualizado
 
@@ -231,6 +289,7 @@ todas las entradas de `mappings` (viejas + nuevas, incluyendo los `testIds` del 
 
 Reportarle al usuario, en texto, no en JSON crudo:
 - Cuántos Requerimientos se actualizaron (y a qué estado, si cambió).
+- Cuántos Requerimientos se crearon (paso 4.5), y bajo qué Historia de Usuario cada uno.
 - Cuántos Tests se crearon o actualizaron desde `docs/tests-manifest.json`.
 - Qué Requerimientos quedaron sin cobertura clara (para que sepa qué falta implementar o
   documentar mejor).
@@ -300,6 +359,11 @@ nada a mano en la app.
 
 ## Notas de implementación
 
+- Nunca crear un Requerimiento (paso 4.5) sin haberle confirmado antes al usuario nombre,
+  tipo e Historia de Usuario destino, y sin haber recibido una confirmación explícita --
+  a diferencia de actualizar uno existente, crear de más ensucia el backlog.
+- Nunca inventar una Historia de Usuario para colgar un Requerimiento nuevo -- si no hay
+  ninguna razonable, avisar y no crear el Requerimiento suelto.
 - Nunca marcar `isAutoGenerated`/crear un Test sin evidencia real de que existe en el
   repo — es preferible no reportar cobertura de tests a inventarla.
 - Nunca fuerces `status` a `done` sólo porque encontraste documentación que lo describe
