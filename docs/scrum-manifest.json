@@ -2,7 +2,7 @@
   "apiUrl": "https://scrum.misitiowebpersonal.com.ar",
   "baseUrl": "http://10.24.206.203:8080",
   "projectId": "PROJ-1785509638361",
-  "lastSyncAt": "2026-08-04T11:07:00.000Z",
+  "lastSyncAt": "2026-08-05T13:24:00.000Z",
   "mappings": [
     {
       "requirementId": "REQ-1785771199977",
@@ -13,7 +13,7 @@
     {
       "requirementId": "REQ-1785771214462",
       "code": "RF-04",
-      "sourceRef": "docs/REQUERIMIENTOS.md#RF-04",
+      "sourceRef": "app.js#validatePasswordMatch",
       "testIds": ["TEST-1785852129655"]
     },
     {

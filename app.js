@@ -116,10 +116,101 @@ document.addEventListener('DOMContentLoaded', () => {
             showTypingIndicator();
             setTimeout(() => {
                 removeTypingIndicator();
-                appendMessage('Asistente Profesionales', '¡Genial! Para registrarte, por favor completa tu correo electrónico, contraseña e indica si vas a prestar servicios médicos.');
-                optionsContainer.innerHTML = '';
+                appendMessage('Asistente Profesionales', '¡Genial! Por favor completa los campos del registro. Validaremos que tu contraseña y la confirmación de la misma coincidan exactamente.');
+                renderRegistrationForm();
             }, 600);
         }
+    }
+
+    // Renders registration form with RF-04 password coincidence validation
+    function renderRegistrationForm() {
+        optionsContainer.innerHTML = `
+            <form id="registration-form" class="form-card" style="width: 100%;">
+                <div class="form-group">
+                    <label class="form-label" for="reg-email">Correo Electrónico</label>
+                    <input type="email" id="reg-email" class="form-input" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-password">Contraseña</label>
+                    <input type="password" id="reg-password" class="form-input" placeholder="Ingresa tu contraseña" required autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-confirm-password">Confirmar Contraseña</label>
+                    <input type="password" id="reg-confirm-password" class="form-input" placeholder="Repite tu contraseña" required autocomplete="new-password">
+                    <div id="password-match-feedback" class="password-feedback" role="alert" aria-live="polite"></div>
+                </div>
+                <button type="submit" id="btn-submit-register" class="action-btn-pill primary-filled" style="width: 100%; justify-content: center; margin-top: 8px;">
+                    Completar Registro
+                </button>
+            </form>
+        `;
+
+        const regForm = document.getElementById('registration-form');
+        const regPassword = document.getElementById('reg-password');
+        const regConfirmPassword = document.getElementById('reg-confirm-password');
+        const feedback = document.getElementById('password-match-feedback');
+        const submitBtn = document.getElementById('btn-submit-register');
+
+        // RF-04: Password coincidence validation function
+        function validatePasswordMatch() {
+            const passVal = regPassword.value;
+            const confirmVal = regConfirmPassword.value;
+
+            if (!confirmVal && !passVal) {
+                feedback.textContent = '';
+                feedback.className = 'password-feedback';
+                regPassword.classList.remove('input-error', 'input-success');
+                regConfirmPassword.classList.remove('input-error', 'input-success');
+                return true;
+            }
+
+            if (passVal !== confirmVal) {
+                feedback.textContent = '❌ Las contraseñas no coinciden. Por favor verifica que sean idénticas.';
+                feedback.className = 'password-feedback error';
+                regConfirmPassword.classList.add('input-error');
+                regConfirmPassword.classList.remove('input-success');
+                return false;
+            } else {
+                feedback.textContent = '✓ Las contraseñas coinciden correctamente.';
+                feedback.className = 'password-feedback success';
+                regConfirmPassword.classList.remove('input-error');
+                regConfirmPassword.classList.add('input-success');
+                return true;
+            }
+        }
+
+        // Live input event listeners for instant validation
+        regPassword.addEventListener('input', validatePasswordMatch);
+        regConfirmPassword.addEventListener('input', validatePasswordMatch);
+
+        // Form submission handling with strict RF-04 validation
+        regForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const passVal = regPassword.value;
+            const confirmVal = regConfirmPassword.value;
+
+            if (passVal !== confirmVal) {
+                feedback.textContent = '❌ Las contraseñas no coinciden. El registro no puede procesarse hasta que ambas sean idénticas.';
+                feedback.className = 'password-feedback error';
+                regConfirmPassword.classList.add('input-error');
+                
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    appendMessage('Asistente Profesionales', '⚠️ Error de validación: La contraseña y la confirmación de contraseña no coinciden exactamente.');
+                }, 400);
+                return;
+            }
+
+            // Valid passwords match (RF-04 requirement met)
+            showTypingIndicator();
+            setTimeout(() => {
+                removeTypingIndicator();
+                appendMessage('Asistente Profesionales', '✅ ¡Validación exitosa! La contraseña y la confirmación de contraseña coinciden exactamente.');
+                optionsContainer.innerHTML = '';
+                renderInitialOptions();
+            }, 500);
+        });
     }
 
     // Free form chat input handler
