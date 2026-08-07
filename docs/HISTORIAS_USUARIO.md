@@ -1,6 +1,6 @@
 # Historias de Usuario -- Profesionales
 
-_Generado automaticamente el 2026-08-05T16:24:14.868Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-08-07T13:21:48.738Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
