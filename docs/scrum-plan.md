@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-08-05T16:12:01.807Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-08-07T13:21:47.709Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -16,7 +16,7 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 ## Detalle
 
 ### RF-01 — Interfaz gráfica de chat y bienvenida
-Implementada interfaz grafica de chat y bienvenida (RF-01) en index.html, styles.css y app.js con botones interactivos de Iniciar Sesion y Registrarse.
+Trabajo finalizado en la rama feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida y pusheado a origin.
 - Estimado: 5h
 
 ### RF-04 — Validación de coincidencia de contraseñas
