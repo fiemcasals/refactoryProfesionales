@@ -1,43 +1,44 @@
 {
   "apiUrl": "https://scrum.misitiowebpersonal.com.ar",
+  "baseUrl": "http://10.24.206.203:8080",
   "projectId": "PROJ-1785509638361",
-  "lastSyncAt": "2026-08-04T09:14:00.000Z",
+  "lastSyncAt": "2026-08-04T11:07:00.000Z",
   "mappings": [
     {
       "requirementId": "REQ-1785771199977",
       "code": "RF-01",
-      "sourceRef": "docs/REQUERIMIENTOS.md#RF-01",
-      "testIds": []
+      "sourceRef": "index.html#chat-container",
+      "testIds": ["TEST-1785847507338"]
     },
     {
       "requirementId": "REQ-1785771214462",
       "code": "RF-04",
       "sourceRef": "docs/REQUERIMIENTOS.md#RF-04",
-      "testIds": []
+      "testIds": ["TEST-1785852129655"]
     },
     {
       "requirementId": "REQ-1785771214528",
       "code": "RF-05",
       "sourceRef": "docs/REQUERIMIENTOS.md#RF-05",
-      "testIds": []
+      "testIds": ["TEST-1785852135513"]
     },
     {
       "requirementId": "REQ-1785771214393",
       "code": "RF-03",
       "sourceRef": "docs/REQUERIMIENTOS.md#RF-03",
-      "testIds": []
+      "testIds": ["TEST-1785852138801"]
     },
     {
       "requirementId": "REQ-1785771214294",
       "code": "RF-02",
       "sourceRef": "docs/REQUERIMIENTOS.md#RF-02",
-      "testIds": []
+      "testIds": ["TEST-1785852142170"]
     },
     {
       "requirementId": "REQ-1785771214595",
       "code": "RNF-01",
       "sourceRef": "docs/REQUERIMIENTOS.md#RNF-01",
-      "testIds": []
+      "testIds": ["TEST-1785852146023"]
     }
   ]
 }
