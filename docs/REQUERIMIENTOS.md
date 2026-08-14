@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-08-14T16:57:55.558Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-08-14T16:58:29.598Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -27,3 +27,9 @@ Verificar si el correo electrónico ingresado en el registro ya existe en la pla
 ### RNF-01: Ocultamiento y visibilidad toggle en campos de contraseña (No funcional)
 
 Los campos de contraseña en inicio de sesión y registro deben ocultar por defecto el texto tipeado e incluir un botón/ícono de ojo para mostrar u ocultar los caracteres.
+
+## HU-02: Gestión de Perfil de Profesional / Paciente
+
+### RF-01: prueba (Funcional)
+
+prueba
