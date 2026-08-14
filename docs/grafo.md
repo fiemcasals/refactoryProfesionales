@@ -1,6 +1,6 @@
 # Grafo de Dependencias -- Profesionales
 
-_Generado automaticamente el 2026-08-14T16:57:56.625Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-08-14T16:58:30.693Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ```mermaid
 graph TD
@@ -11,6 +11,9 @@ graph TD
     REQ_1785771214462["RF-04: Validación de coincidencia de contraseñas"]
     REQ_1785771214528["RF-05: Notificación y control de correo duplicado"]
     REQ_1785771214595["RNF-01: Ocultamiento y visibilidad toggle en campos de contraseña"]
+  end
+  subgraph US_1785769796519["HU-02: Gestión de Perfil de Profesional / Paciente"]
+    REQ_1786726707284["RF-01: prueba"]
   end
   REQ_1785771199977 --> REQ_1785771214294
   REQ_1785771214393 --> REQ_1785771214294
