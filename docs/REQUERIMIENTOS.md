@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-08-14T16:56:33.522Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-08-14T16:57:42.335Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
