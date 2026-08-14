@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-08-14T16:56:31.205Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-08-14T16:57:39.729Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -11,7 +11,7 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 | 3 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | scrum-prof | RF-04 | — |
 | 4 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | qa-prof | RF-04, RF-05 | — |
 | 5 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | Sin asignar | RF-01, RF-03 | — |
-| 6 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | Sin asignar | RF-02, RF-03 | — |
+| 6 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | tester-prof | RF-02, RF-03 | — |
 
 ## Detalle
 
