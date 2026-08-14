@@ -1,6 +1,6 @@
 # Grafo de Dependencias -- Profesionales
 
-_Generado automaticamente el 2026-08-14T16:58:30.693Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-08-14T17:03:04.370Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ```mermaid
 graph TD
@@ -23,4 +23,5 @@ graph TD
   REQ_1785771214462 --> REQ_1785771214528
   REQ_1785771214294 --> REQ_1785771214595
   REQ_1785771214393 --> REQ_1785771214595
+  REQ_1785771214595 --> REQ_1786726707284
 ```
