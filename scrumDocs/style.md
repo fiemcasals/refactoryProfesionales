@@ -1,0 +1,5 @@
+- Paleta: azul primario #2563eb como único acento interactivo, más semánticos (verde=confirmado, ámbar=pendiente, rojo=cancelar/peligro), y un slate-900 oscuro exclusivo para la franja de guardia/llamada entrante.
+- Tipografía: Inter (300–700) vía Google Fonts, escala completa desde 32px/800 (montos) hasta 11px uppercase (labels).
+- Tokens: radios (20px burbujas, 14px cards, 20–24px píldoras), sombras --shadow-sm/md, transiciones 0.15–0.22s.
+- Componentes en vivo: burbujas de chat, badges, botones de acción, slots de horario, cards de profesional/turno, input de chat, toast — todos con el CSS real, no recreado.
+- Principios: min-height 44px táctil, un solo acento, forma píldora vs. card.
