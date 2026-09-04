@@ -1,0 +1,1 @@
+Stack tecnologico: Django con React / Vite
