@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-28T14:16:10.115Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-28T14:33:00.445Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -10,7 +10,14 @@ Al acceder a la plataforma (https://profesionales.misitiowebpersonal.com.ar/), m
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- Al acceder a la raíz de la plataforma se renderiza la interfaz de chat completa: cabecera con la marca "Profesionales" y el estado "Asistente en línea", el área de mensajes #messages-list, la barra de opciones #options-container y el campo de entrada #chat-input.
+- Entre 0 ms y 3.000 ms después de cargar la página, el área de mensajes contiene un mensaje del emisor "Asistente Profesionales" con el texto "¡Hola! Bienvenid@ a Profesionales".
+- La bienvenida deja disponibles exactamente dos botones, #btn-login y #btn-register, ambos de tipo button, dentro de #options-container. No existe ningún control que exija ingresar un número de opción ni escribir texto para elegir entre iniciar sesión o registrarse.
+- Al presionar #btn-login se agrega al chat el mensaje del usuario "Quiero iniciar sesión" y, dentro de los 2.000 ms siguientes, el asistente responde indicando ingresar correo y contraseña; #options-container queda sin botones.
+- Al presionar #btn-register se agrega al chat el mensaje del usuario "Quiero registrarme" y, dentro de los 2.000 ms siguientes, el asistente responde indicando los datos de registro; #options-container queda sin botones.
+- El formulario #chat-form enruta el texto enviado y en los cuatro casos deja #chat-input vacío: (a) contiene "hola", "buenas" o "inicio" → el asistente responde el saludo y repone #btn-login y #btn-register; (b) contiene "login" o "iniciar" → dispara el flujo idéntico a presionar #btn-login; (c) contiene "registro" o "registrar" → dispara el flujo idéntico a presionar #btn-register; (d) cualquier otro texto → el asistente pide elegir una opción y repone los dos botones.
+- El texto que envía el usuario se muestra literalmente: una cadena que contiene marcado HTML no se interpreta, no incorpora elementos al DOM y no ejecuta scripts en la página.
+- La interfaz aplica docs/style.md: tipografía Inter vía Google Fonts, --primary #2563eb como único acento interactivo, botones .action-btn-pill con height 48px (>= 44px táctil) y transiciones de 0,15 s y 0,22 s.
 
 ### RF-02: Autenticación de usuarios (Inicio de Sesión) (Funcional)
 
