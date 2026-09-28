@@ -1,12 +1,12 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-28T14:32:58.124Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-28T14:34:35.319Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
 | Orden | Código | Requerimiento | Historia de Usuario | Módulo | Entrega | Estado | Desarrollador | Depende de | Rechazos |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | Hacer | dev | — | — |
+| 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | Haciendo | dev | — | — |
 | 2 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01 | — |
 | 3 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | Sin asignar | RF-01 | — |
 | 4 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | scrum-prof | RF-04 | — |
@@ -17,7 +17,7 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 ## Detalle
 
 ### RF-01 — Interfaz gráfica de chat y bienvenida
-Trabajo finalizado en la rama feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida y pusheado a origin.
+Inicio de desarrollo del requerimiento. Retomo la rama feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida (5 commits de mcasals, ultimo 0c374ae 2026-08-07) con autorizacion del usuario. El reloj arranca desde hoy: el tramo anterior nunca se registro (real=", timerStartedAt=null).
 - Estimado: 5h
 
 ### RF-02 — Autenticación de usuarios (Inicio de Sesión)
