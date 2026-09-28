@@ -1,0 +1,13 @@
+{
+  "name": "profesionales-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Frontend estático de la plataforma Profesionales (RF-01: interfaz de chat y bienvenida).",
+  "scripts": {
+    "start": "python -m http.server 3000",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.1"
+  }
+}
