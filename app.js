@@ -26,7 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const bubbleDiv = document.createElement('div');
         bubbleDiv.className = 'message-bubble';
-        bubbleDiv.innerHTML = text;
+        // RF-01 criterio 7: el texto del usuario se muestra literal. El del asistente
+        // es un literal de este archivo (con <strong>/<br>), por eso entra como markup.
+        if (isUser) {
+            bubbleDiv.textContent = text;
+        } else {
+            bubbleDiv.innerHTML = text;
+        }
 
         const timeSpan = document.createElement('span');
         timeSpan.className = 'message-time';
