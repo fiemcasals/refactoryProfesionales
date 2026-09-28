@@ -1,12 +1,12 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-28T14:07:36.936Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-28T14:15:38.905Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
 | Orden | Código | Requerimiento | Historia de Usuario | Módulo | Entrega | Estado | Desarrollador | Depende de | Rechazos |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | Haciendo | dev | — | — |
+| 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | Hacer | dev | — | — |
 | 2 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01 | — |
 | 3 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | Sin asignar | RF-01 | — |
 | 4 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | scrum-prof | RF-04 | — |
