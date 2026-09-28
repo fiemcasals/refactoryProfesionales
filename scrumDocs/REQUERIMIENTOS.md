@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-24T12:45:51.138Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-28T13:56:17.938Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -8,28 +8,56 @@ _Generado automaticamente el 2026-09-24T12:45:51.138Z -- no editar a mano, se so
 
 Al acceder a la plataforma (https://profesionales.misitiowebpersonal.com.ar/), mostrar interfaz en formato chat con mensaje de bienvenida y opciones presentadas directamente como botones interactivos para inicio de sesion o registro (sin requerir ingresar texto ni numeros de opcion).
 
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+
 ### RF-02: Autenticación de usuarios (Inicio de Sesión) (Funcional)
 
 Permitir el inicio de sesión solicitando correo electrónico y contraseña. El campo de contraseña debe disponer de un ícono de ojo para alternar su visibilidad.
+
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
 
 ### RF-03: Registro de usuarios con perfil prestador de servicios (Funcional)
 
 Permitir el registro de usuarios solicitando correo electrónico, contraseña, confirmación de contraseña e indicador de si presta servicios médicos. Todos los usuarios tienen capacidad de paciente; si marcan el indicador, quedan habilitados como profesionales médicos.
 
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+
 ### RF-04: Validación de coincidencia de contraseñas (Funcional)
 
 Validar en el registro que la contraseña y la confirmación de contraseña coincidan exactamente antes de procesar el alta de usuario.
+
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
 
 ### RF-05: Notificación y control de correo duplicado (Funcional)
 
 Verificar si el correo electrónico ingresado en el registro ya existe en la plataforma e informar/notificar al usuario en caso de duplicidad.
 
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+
 ### RNF-01: Ocultamiento y visibilidad toggle en campos de contraseña (No funcional)
 
 Los campos de contraseña en inicio de sesión y registro deben ocultar por defecto el texto tipeado e incluir un botón/ícono de ojo para mostrar u ocultar los caracteres.
+
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
 
 ## HU-02: Gestión de Perfil de Profesional / Paciente
 
 ### RF-01: prueba (Funcional)
 
 prueba
+
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
