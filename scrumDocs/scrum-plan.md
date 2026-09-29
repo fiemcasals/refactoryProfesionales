@@ -1,14 +1,14 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-29T13:51:25.593Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-29T13:51:36.337Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
 | Orden | Código | Requerimiento | Historia de Usuario | Módulo | Entrega | Estado | Desarrollador | Depende de | Rechazos |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | production ✓✓ | dev | — | — |
-| 2 | RF-01 | Desplegar la app en el entorno dev con URL pública HTTPS | RO-01 | — | — | Hacer | dev | — | — |
-| 3 | RF-02 | Desplegar la app en el entorno testing con URL pública HTTPS | RO-01 | — | — | Hacer | dev | — | — |
+| 2 | RF-01 | Levantar el entorno local de dev con CORS para la app de Scrum | RO-01 | — | — | Hacer | dev | — | — |
+| 3 | RF-02 | Levantar el entorno local de testing con CORS para la app de Scrum | RO-01 | — | — | Hacer | dev | — | — |
 | 4 | RF-03 | Preparar la máquina de producción con dominio, certificado y backups | RO-01 | — | — | Hacer | dev | — | — |
 | 5 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
 | 6 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06, RF-01 | — |
@@ -46,10 +46,10 @@ Quedo afuera: login y registro reales (RF-02 y RF-03, todavia en to_do); automat
 Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, commit ed86993, PR #1 abierto hacia dev. La rama esta atrasada respecto de dev (dev avanzo hasta a858328); la interseccion de archivos entre mi rama y dev es vacia, asi que el merge no deberia tener conflictos.
 - Estimado: 5h
 
-### RF-01 — Desplegar la app en el entorno dev con URL pública HTTPS
+### RF-01 — Levantar el entorno local de dev con CORS para la app de Scrum
 - Estimado: 4h
 
-### RF-02 — Desplegar la app en el entorno testing con URL pública HTTPS
+### RF-02 — Levantar el entorno local de testing con CORS para la app de Scrum
 - Estimado: 4h
 
 ### RF-03 — Preparar la máquina de producción con dominio, certificado y backups
