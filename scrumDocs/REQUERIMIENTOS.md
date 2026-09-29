@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:36:32.902Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:51:28.059Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -107,28 +107,28 @@ Los campos de contraseña en inicio de sesión y registro deben ocultar por defe
 
 ### RF-01: Desplegar la app en el entorno dev con URL pública HTTPS (Funcional)
 
-Hoy el proyecto sólo tiene un entorno 'local' (http://localhost:3000), que la verificación de pruebas no puede usar porque no es accesible desde la red. Sin entornos públicos desplegados no se puede validar ningún Requerimiento desde la app ni promover dev -> testing -> main. Este operacional crea las tres URLs públicas y las registra en el proyecto.
+El proyecto sólo tenía un entorno único sin nombre, que no distingue dev de testing. La verificación de pruebas de la app necesita los entornos registrados: 'dev' y 'testing' corren en localhost porque QA valida contra la máquina donde se levanta la app, y sólo 'produccion' es una URL pública. Bloqueo conocido de esta tarjeta: el backend tiene que responder Access-Control-Allow-Origin al origen de la instancia de Scrum Master AI en dev y testing, porque la verificación se dispara desde el navegador. Es lo que RF-01 dejó anotado sin resolver.
 
 **Condiciones de aprobación**
 
-- La rama dev está desplegada en una URL pública con HTTPS válido, accesible desde internet y sin autenticación.
-- El endpoint de salud del backend responde 200 sin autenticación desde la URL pública, no sólo desde localhost.
-- La aplicación carga en la URL pública: la interfaz de chat renderiza y el mensaje de bienvenida aparece dentro de los 3.000 ms.
-- El backend responde CORS al origen de la app de Scrum, sólo en este entorno.
+- El servidor de desarrollo corre en http://localhost:3000 mientras se valida, y la interfaz de chat carga en esa dirección.
+- El backend responde CORS al origen de la instancia de Scrum Master AI, sólo en configuración de desarrollo.
+- Un endpoint de salud del backend responde 200 sin autenticación desde esa dirección.
 - La URL queda registrada en el proyecto como entorno 'dev' y es la que usa la verificación de pruebas.
+- Existe un comando documentado que levanta el entorno local de punta a punta, para que cualquiera pueda repetir la verificación.
 
-### RF-02: Desplegar la app en el entorno testing con URL pública HTTPS (Funcional)
+### RF-02: Levantar el entorno local de testing con CORS para la app de Scrum (Funcional)
 
 Instancia donde QA valida los Requerimientos promoted desde dev antes de promover testing -> main. Sin esta URL, ninguna prueba de la app puede ejecutarse.
 
 **Condiciones de aprobación**
 
-- La rama testing está desplegada en una URL pública con HTTPS válido, accesible desde internet.
-- Un endpoint de salud del backend responde 200 sin autenticación desde esa URL.
-- La interfaz de chat renderiza en esa URL y el mensaje de bienvenida aparece dentro de los 3.000 ms.
-- El backend responde CORS al origen de la app de Scrum, sólo en este entorno.
+- La instancia de prueba corre en http://localhost:8000 y la interfaz de chat carga en esa dirección.
+- El backend responde CORS al origen de la instancia de Scrum Master AI, sólo en configuración de desarrollo.
+- Un endpoint de salud del backend responde 200 sin autenticación desde esa dirección.
 - La URL queda registrada en el proyecto como entorno 'testing'.
-- Un Requerimiento promovido desde dev se puede observar en esta URL, que es la base contra la que corren las pruebas de la app.
+- Un Requerimiento promovido a in_testing se puede observar en esta dirección, que es la base contra la que QA corre las pruebas.
+- QA no necesita descartar ningún requisito por no tener dónde probarlo.
 
 ### RF-03: Preparar la máquina de producción con dominio, certificado y backups (Funcional)
 
