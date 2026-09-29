@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:51:28.059Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:51:39.058Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -105,7 +105,7 @@ Los campos de contraseña en inicio de sesión y registro deben ocultar por defe
 
 ## RO-01: Levantar los entornos de dev, testing y producción
 
-### RF-01: Desplegar la app en el entorno dev con URL pública HTTPS (Funcional)
+### RF-01: Levantar el entorno local de dev con CORS para la app de Scrum (Funcional)
 
 El proyecto sólo tenía un entorno único sin nombre, que no distingue dev de testing. La verificación de pruebas de la app necesita los entornos registrados: 'dev' y 'testing' corren en localhost porque QA valida contra la máquina donde se levanta la app, y sólo 'produccion' es una URL pública. Bloqueo conocido de esta tarjeta: el backend tiene que responder Access-Control-Allow-Origin al origen de la instancia de Scrum Master AI en dev y testing, porque la verificación se dispara desde el navegador. Es lo que RF-01 dejó anotado sin resolver.
 
