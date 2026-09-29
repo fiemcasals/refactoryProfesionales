@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-29T13:15:47.330Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-29T13:15:57.468Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -9,7 +9,7 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 | 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | production ✓✓ | dev | — | — |
 | 2 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
 | 3 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
-| 4 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | Sin asignar | RF-01, RF-06 | — |
+| 4 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
 | 5 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | scrum-prof | RF-04, RF-06 | — |
 | 6 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-04, RF-05, RF-06 | — |
 | 7 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | scrum-prof | RF-02, RF-03, RF-06 | — |
