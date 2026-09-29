@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:36:07.442Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:36:22.321Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -123,7 +123,12 @@ Instancia donde QA valida los Requerimientos promoted desde dev antes de promove
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- La rama testing está desplegada en una URL pública con HTTPS válido, accesible desde internet.
+- Un endpoint de salud del backend responde 200 sin autenticación desde esa URL.
+- La interfaz de chat renderiza en esa URL y el mensaje de bienvenida aparece dentro de los 3.000 ms.
+- El backend responde CORS al origen de la app de Scrum, sólo en este entorno.
+- La URL queda registrada en el proyecto como entorno 'testing'.
+- Un Requerimiento promovido desde dev se puede observar en esta URL, que es la base contra la que corren las pruebas de la app.
 
 ### RF-03: Preparar la máquina de producción con dominio, certificado y backups (Funcional)
 
@@ -131,4 +136,9 @@ Instancia donde corre la rama main. Sólo el Project Manager puede promover test
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- La rama main está desplegada en el dominio final del proyecto con un certificado TLS válido y vigente.
+- El dominio resuelve al servidor y la interfaz de chat carga por HTTPS sin avisos de certificado.
+- La URL queda registrada en el proyecto como entorno de producción.
+- Las variables de entorno de producción están definidas y la configuración no arrastra ningún secreto de desarrollo.
+- Hay un backup automático configurado y se verificó al menos una restauración.
+- El backend NO responde CORS al origen de la app de Scrum en producción.
