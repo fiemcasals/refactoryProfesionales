@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-29T13:35:52.111Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-29T13:36:05.192Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -9,12 +9,13 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 | 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | production ✓✓ | dev | — | — |
 | 2 | RF-01 | Desplegar la app en el entorno dev con URL pública HTTPS | RO-01 | — | — | Hacer | dev | — | — |
 | 3 | RF-02 | Desplegar la app en el entorno testing con URL pública HTTPS | RO-01 | — | — | Hacer | dev | — | — |
-| 4 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
-| 5 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
-| 6 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
-| 7 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | dev | RF-04, RF-06 | — |
-| 8 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-04, RF-05, RF-06 | — |
-| 9 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | dev | RF-02, RF-03, RF-06 | — |
+| 4 | RF-03 | Preparar la máquina de producción con dominio, certificado y backups | RO-01 | — | — | Hacer | dev | — | — |
+| 5 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
+| 6 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
+| 7 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
+| 8 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | dev | RF-04, RF-06 | — |
+| 9 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-04, RF-05, RF-06 | — |
+| 10 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | dev | RF-02, RF-03, RF-06 | — |
 
 ## Detalle
 
@@ -50,6 +51,9 @@ Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, c
 
 ### RF-02 — Desplegar la app en el entorno testing con URL pública HTTPS
 - Estimado: 4h
+
+### RF-03 — Preparar la máquina de producción con dominio, certificado y backups
+- Estimado: 8h
 
 ### RF-06 — Reimplementar la interfaz de chat y bienvenida sobre React + Vite
 - Estimado: 8h
