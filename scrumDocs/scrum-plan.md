@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-29T13:05:49.203Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-29T13:15:47.330Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -13,7 +13,6 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 | 5 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | scrum-prof | RF-04, RF-06 | — |
 | 6 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-04, RF-05, RF-06 | — |
 | 7 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | scrum-prof | RF-02, RF-03, RF-06 | — |
-| 8 | RF-01 | prueba | HU-02 | — | — | Hacer | scrum-prof | RNF-01 | — |
 
 ## Detalle
 
@@ -61,6 +60,3 @@ Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, c
 
 ### RNF-01 — Ocultamiento y visibilidad toggle en campos de contraseña
 - Estimado: 5h
-
-### RF-01 — prueba
-- Estimado: 4h
