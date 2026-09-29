@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:35:04.108Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:35:54.528Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -116,3 +116,11 @@ Hoy el proyecto sólo tiene un entorno 'local' (http://localhost:3000), que la v
 - La aplicación carga en la URL pública: la interfaz de chat renderiza y el mensaje de bienvenida aparece dentro de los 3.000 ms.
 - El backend responde CORS al origen de la app de Scrum, sólo en este entorno.
 - La URL queda registrada en el proyecto como entorno 'dev' y es la que usa la verificación de pruebas.
+
+### RF-02: Desplegar la app en el entorno testing con URL pública HTTPS (Funcional)
+
+Instancia donde QA valida los Requerimientos promoted desde dev antes de promover testing -> main. Sin esta URL, ninguna prueba de la app puede ejecutarse.
+
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
