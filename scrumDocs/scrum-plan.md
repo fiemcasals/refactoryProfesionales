@@ -1,13 +1,13 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-29T13:34:29.983Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-29T13:35:01.559Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
 | Orden | Código | Requerimiento | Historia de Usuario | Módulo | Entrega | Estado | Desarrollador | Depende de | Rechazos |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | production ✓✓ | dev | — | — |
-| 2 | RF-01 | Levantar los entornos de dev, testing y producción | RO-01 | — | — | Hacer | dev | — | — |
+| 2 | RF-01 | Desplegar la app en el entorno dev con URL pública HTTPS | RO-01 | — | — | Hacer | dev | — | — |
 | 3 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
 | 4 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
 | 5 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
@@ -44,7 +44,7 @@ Quedo afuera: login y registro reales (RF-02 y RF-03, todavia en to_do); automat
 Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, commit ed86993, PR #1 abierto hacia dev. La rama esta atrasada respecto de dev (dev avanzo hasta a858328); la interseccion de archivos entre mi rama y dev es vacia, asi que el merge no deberia tener conflictos.
 - Estimado: 5h
 
-### RF-01 — Levantar los entornos de dev, testing y producción
+### RF-01 — Desplegar la app en el entorno dev con URL pública HTTPS
 - Estimado: 4h
 
 ### RF-06 — Reimplementar la interfaz de chat y bienvenida sobre React + Vite
