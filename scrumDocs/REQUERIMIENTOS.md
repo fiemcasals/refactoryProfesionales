@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:16:54.356Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:25:31.275Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -39,7 +39,12 @@ Permitir el registro de usuarios solicitando correo electrónico, contraseña, c
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- El formulario de registro está disponible en la interfaz de chat y solicita, en este orden: correo electrónico,Contraseña, confirmación deContraseña e indicador de si presta servicios médicos.
+- Al registrarse sin marcar el indicador, la cuenta queda creada con capacidad de paciente.
+- Al marcar el indicador, la cuenta queda creada con capacidad de profesional médico además de paciente.
+- Al completar el registro, la respuesta confirma la creación y la interfaz inicia la sesión del usuario recién creado mostrando su correo y su capacidad.
+- El correo de una cuenta ya existente no puede registrarse de nuevo: la respuesta indica que ese correo ya tiene cuenta. La verificación del duplicado es responsabilidad de RF-05.
+- LaContraseña nunca se devuelve en ninguna respuesta ni se escribe en los logs del servidor.
 
 ### RF-04: Validación de coincidencia de contraseñas (Funcional)
 
@@ -47,7 +52,12 @@ Validar en el registro que la contraseña y la confirmación de contraseña coin
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- El formulario de registro no envía la solicitud al backend mientras laContraseña y su confirmación sean distintas.
+- La comparación distingue mayúsculas de minúsculas: "Abc123" y "abc123" se consideran distintas y el envío se rechaza.
+- La comparación distingue todos los caracteres, incluidos los espacios iniciales y finales: "abc123" y "abc123 " se consideran distintas y el envío se rechaza.
+- Cuando las dosContraseñas coinciden, el campo de confirmación se marca como válido y el formulario habilita el envío.
+- Cuando no coinciden, el error se muestra en el campo de confirmación, el envío queda bloqueado y la interfaz conserva el valor tipeado en el campo deContraseña.
+- Si las dosContraseñas están vacías, coinciden entre sí y esta validación las acepta: en ese caso el rechazo lo produce la validación de campos obligatorios, no este criterio.
 
 ### RF-05: Notificación y control de correo duplicado (Funcional)
 
@@ -55,7 +65,12 @@ Verificar si el correo electrónico ingresado en el registro ya existe en la pla
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- Antes de crear la cuenta, el backend verifica si el correo ya está registrado y la interfaz no da el alta hasta tener esa respuesta.
+- La verificación de duplicado no distingue mayúsculas de minúsculas: un correo que sólo difiere en mayúsculas se considera duplicado.
+- La verificación de duplicado se hace en el backend y no únicamente en el navegador: una solicitud enviada directamente al endpoint de registro con un correo existente también es rechazada.
+- Si el correo no está registrado, el registro continúa el curso normal hasta la creación de la cuenta.
+- Si el correo ya está registrado, no se crea ninguna cuenta nueva y la respuesta lo indica en el chat, no en una pantalla aparte.
+- El mensaje de duplicado señala la acción posible —iniciar sesión con ese correo— sin revelar ningún dato adicional de la cuenta existente.
 
 ### RF-06: Reimplementar la interfaz de chat y bienvenida sobre React + Vite (Funcional)
 
@@ -80,4 +95,10 @@ Los campos de contraseña en inicio de sesión y registro deben ocultar por defe
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- Todo campo deContraseña de la plataforma aparece enmascarado al cargar la página, sin ninguna acción del usuario.
+- Cada campo deContraseña tiene un botón de visibilidad asociado, con etiqueta accesible que dice si va a mostrar o a ocultar los caracteres.
+- El botón alterna el estado del campo al que está asociado y sólo a ese: accione el de uno y el otro no cambia.
+- El botón de visibilidad está disponible tanto en el formulario de inicio de sesión como en el de registro, y en todos los campos deContraseña de ambos formularios, incluido el de confirmación deContraseña del registro.
+- Al ocultar de nuevo, el texto tipeado sigue siendo el mismo: el toggle no borra lo que el usuario escribió.
+- El botón se opera con teclado y con puntero, y no interrumpe el orden de foco de los campos del formulario.
+- El botón de visibilidad cumple el tamaño táctil mínimo de 44x44 px y respeta el contraste definido en docs/style.md.
