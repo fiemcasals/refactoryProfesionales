@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-29T13:36:19.516Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-29T13:36:30.692Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -11,7 +11,7 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 | 3 | RF-02 | Desplegar la app en el entorno testing con URL pública HTTPS | RO-01 | — | — | Hacer | dev | — | — |
 | 4 | RF-03 | Preparar la máquina de producción con dominio, certificado y backups | RO-01 | — | — | Hacer | dev | — | — |
 | 5 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
-| 6 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
+| 6 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06, RF-01 | — |
 | 7 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
 | 8 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | dev | RF-04, RF-06 | — |
 | 9 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-04, RF-05, RF-06 | — |
