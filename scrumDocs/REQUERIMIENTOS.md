@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:15:59.691Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:16:54.356Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -25,7 +25,13 @@ Permitir el inicio de sesión solicitando correo electrónico y contraseña.
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- El backend corre como aplicación Django y expone un endpoint de salud que responde 200 sin requerir autenticación.
+- El formulario de inicio de sesión está disponible en la interfaz de chat y solicita correo electrónico yContraseña.
+- Al enviar el formulario con un correo registrado y suContraseña correcta, la respuesta devuelve un token de sesión y la interfaz confirma el ingreso mostrando el correo del usuario autenticado.
+- Al enviar el formulario con un correo que no está registrado, o con unaContraseña incorrecta para un correo existente, la respuesta indica credenciales no válidas y no devuelve token de sesión. El mensaje no distingue entre correo inexistente yContraseña incorrecta.
+- La validación del formulario rechaza el envío, sin llamar al backend, cuando el correo o laContraseña están vacíos o el correo no tiene formato válido, mostrando el error en el campo correspondiente.
+- El correo se normaliza a minúsculas: dos registros que difieren sólo en mayúsculas son la misma cuenta.
+- LaContraseña nunca se devuelve en ninguna respuesta ni se escribe en los logs del servidor.
 
 ### RF-03: Registro de usuarios con perfil prestador de servicios (Funcional)
 
