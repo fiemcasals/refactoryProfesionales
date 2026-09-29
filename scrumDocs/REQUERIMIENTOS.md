@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T12:44:22.162Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:05:51.931Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -21,7 +21,7 @@ Al acceder a la plataforma (https://profesionales.misitiowebpersonal.com.ar/), m
 
 ### RF-02: Autenticación de usuarios (Inicio de Sesión) (Funcional)
 
-Permitir el inicio de sesión solicitando correo electrónico y contraseña. El campo de contraseña debe disponer de un ícono de ojo para alternar su visibilidad.
+Permitir el inicio de sesión solicitando correo electrónico y contraseña.
 
 **Condiciones de aprobación**
 
