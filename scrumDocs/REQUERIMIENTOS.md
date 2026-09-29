@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:05:51.931Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:15:51.346Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -71,16 +71,6 @@ La interfaz de RF-01 se implementó en HTML/CSS/JS plano, pero el stack del proy
 ### RNF-01: Ocultamiento y visibilidad toggle en campos de contraseña (No funcional)
 
 Los campos de contraseña en inicio de sesión y registro deben ocultar por defecto el texto tipeado e incluir un botón/ícono de ojo para mostrar u ocultar los caracteres.
-
-**Condiciones de aprobación**
-
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
-
-## HU-02: Gestión de Perfil de Profesional / Paciente
-
-### RF-01: prueba (Funcional)
-
-prueba
 
 **Condiciones de aprobación**
 
