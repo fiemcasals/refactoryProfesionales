@@ -1,6 +1,6 @@
 # Grafo de Dependencias -- Profesionales
 
-_Generado automaticamente el 2026-09-29T14:09:47.422Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T14:10:46.707Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ```mermaid
 graph TD
