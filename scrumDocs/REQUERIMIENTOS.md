@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:30:32.141Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:34:32.445Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -102,3 +102,13 @@ Los campos de contraseña en inicio de sesión y registro deben ocultar por defe
 - Al ocultar de nuevo, el texto tipeado sigue siendo el mismo: el toggle no borra lo que el usuario escribió.
 - El botón se opera con teclado y con puntero, y no interrumpe el orden de foco de los campos del formulario.
 - El botón de visibilidad cumple el tamaño táctil mínimo de 44x44 px y respeta el contraste definido en docs/style.md.
+
+## RO-01: Levantar los entornos de dev, testing y producción
+
+### RF-01: Levantar los entornos de dev, testing y producción (Funcional)
+
+Hoy el proyecto sólo tiene un entorno 'local' (http://localhost:3000), que la verificación de pruebas no puede usar porque no es accesible desde la red. Sin entornos públicos desplegados no se puede validar ningún Requerimiento desde la app ni promover dev -> testing -> main. Este operacional crea las tres URLs públicas y las registra en el proyecto.
+
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
