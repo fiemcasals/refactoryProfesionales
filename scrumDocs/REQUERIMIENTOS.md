@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:34:32.445Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:35:04.108Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -105,10 +105,14 @@ Los campos de contraseña en inicio de sesión y registro deben ocultar por defe
 
 ## RO-01: Levantar los entornos de dev, testing y producción
 
-### RF-01: Levantar los entornos de dev, testing y producción (Funcional)
+### RF-01: Desplegar la app en el entorno dev con URL pública HTTPS (Funcional)
 
 Hoy el proyecto sólo tiene un entorno 'local' (http://localhost:3000), que la verificación de pruebas no puede usar porque no es accesible desde la red. Sin entornos públicos desplegados no se puede validar ningún Requerimiento desde la app ni promover dev -> testing -> main. Este operacional crea las tres URLs públicas y las registra en el proyecto.
 
 **Condiciones de aprobación**
 
-_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+- La rama dev está desplegada en una URL pública con HTTPS válido, accesible desde internet y sin autenticación.
+- El endpoint de salud del backend responde 200 sin autenticación desde la URL pública, no sólo desde localhost.
+- La aplicación carga en la URL pública: la interfaz de chat renderiza y el mensaje de bienvenida aparece dentro de los 3.000 ms.
+- El backend responde CORS al origen de la app de Scrum, sólo en este entorno.
+- La URL queda registrada en el proyecto como entorno 'dev' y es la que usa la verificación de pruebas.
