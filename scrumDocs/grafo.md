@@ -1,6 +1,6 @@
 # Grafo de Dependencias -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:35:05.469Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:35:56.108Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ```mermaid
 graph TD
@@ -15,6 +15,7 @@ graph TD
   end
   subgraph US_1790688869961["RO-01: Levantar los entornos de dev, testing y producción"]
     REQ_1790688869968["RF-01: Desplegar la app en el entorno dev con URL pública HTTPS"]
+    REQ_1790688952068["RF-02: Desplegar la app en el entorno testing con URL pública HTTPS"]
   end
   REQ_1785771199977 --> REQ_1785771214294
   REQ_1790685849827 --> REQ_1785771214294
