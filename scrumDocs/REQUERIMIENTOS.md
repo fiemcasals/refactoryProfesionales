@@ -1,6 +1,6 @@
 # Requerimientos -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:35:54.528Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:36:07.442Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ## HU-01: Interfaz de Bienvenida, Autenticación y Registro de Usuarios con Prestación de Servicios
 
@@ -120,6 +120,14 @@ Hoy el proyecto sólo tiene un entorno 'local' (http://localhost:3000), que la v
 ### RF-02: Desplegar la app en el entorno testing con URL pública HTTPS (Funcional)
 
 Instancia donde QA valida los Requerimientos promoted desde dev antes de promover testing -> main. Sin esta URL, ninguna prueba de la app puede ejecutarse.
+
+**Condiciones de aprobación**
+
+_Sin condiciones de aprobación cargadas: pedíselas al Project Manager o al Scrum Master antes de darlo por terminado._
+
+### RF-03: Preparar la máquina de producción con dominio, certificado y backups (Funcional)
+
+Instancia donde corre la rama main. Sólo el Project Manager puede promover testing -> main, así que esta tarjeta tiene que estar resuelta antes de la primera promoción a producción.
 
 **Condiciones de aprobación**
 
