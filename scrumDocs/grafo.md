@@ -1,6 +1,6 @@
 # Grafo de Dependencias -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:51:29.216Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:51:40.603Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ```mermaid
 graph TD
@@ -14,7 +14,7 @@ graph TD
     REQ_1790685849827["RF-06: Reimplementar la interfaz de chat y bienvenida sobre React + Vite"]
   end
   subgraph US_1790688869961["RO-01: Levantar los entornos de dev, testing y producción"]
-    REQ_1790688869968["RF-01: Desplegar la app en el entorno dev con URL pública HTTPS"]
+    REQ_1790688869968["RF-01: Levantar el entorno local de dev con CORS para la app de Scrum"]
     REQ_1790688952068["RF-02: Levantar el entorno local de testing con CORS para la app de Scrum"]
     REQ_1790688965165["RF-03: Preparar la máquina de producción con dominio, certificado y backups"]
   end
