@@ -1,6 +1,6 @@
 # Grafo de Dependencias -- Profesionales
 
-_Generado automaticamente el 2026-09-29T13:30:34.371Z -- no editar a mano, se sobreescribe en cada publicacion._
+_Generado automaticamente el 2026-09-29T13:34:33.728Z -- no editar a mano, se sobreescribe en cada publicacion._
 
 ```mermaid
 graph TD
@@ -12,6 +12,9 @@ graph TD
     REQ_1785771214528["RF-05: Notificación y control de correo duplicado"]
     REQ_1785771214595["RNF-01: Ocultamiento y visibilidad toggle en campos de contraseña"]
     REQ_1790685849827["RF-06: Reimplementar la interfaz de chat y bienvenida sobre React + Vite"]
+  end
+  subgraph US_1790688869961["RO-01: Levantar los entornos de dev, testing y producción"]
+    REQ_1790688869968["RF-01: Levantar los entornos de dev, testing y producción"]
   end
   REQ_1785771199977 --> REQ_1785771214294
   REQ_1790685849827 --> REQ_1785771214294
