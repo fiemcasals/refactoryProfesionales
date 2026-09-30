@@ -29,6 +29,8 @@ export function useChat() {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [optionsVisible, setOptionsVisible] = useState(false);
     const [typing, setTyping] = useState(false);
+    /** RF-02: el formulario de login vive dentro del chat. */
+    const [loginFormVisible, setLoginFormVisible] = useState(false);
     const idRef = useRef(0);
     const timersRef = useRef<number[]>([]);
 
@@ -52,7 +54,18 @@ export function useChat() {
     const answerLogin = useCallback(() => {
         push({ sender: SENDER_BOT, isUser: false, text: BOT_LOGIN });
         setOptionsVisible(false);
+        // RF-02: mostrar el formulario de inicio de sesión en el chat.
+        setLoginFormVisible(true);
     }, [push]);
+
+    /** RF-02 criterio 3: confirma el ingreso mostrando el correo. */
+    const confirmLogin = useCallback(
+        (email: string) => {
+            setLoginFormVisible(false);
+            push({ sender: SENDER_BOT, isUser: false, text: `Sesión iniciada como ${email}.` });
+        },
+        [push],
+    );
 
     const answerRegister = useCallback(() => {
         push({ sender: SENDER_BOT, isUser: false, text: BOT_REGISTER });
@@ -131,5 +144,5 @@ export function useChat() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { messages, typing, optionsVisible, selectOption, submitText };
+    return { messages, typing, optionsVisible, loginFormVisible, selectOption, submitText, confirmLogin };
 }

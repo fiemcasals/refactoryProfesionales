@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { ChatMessage } from '../types';
 import { MessageBubble } from './MessageBubble';
 
@@ -12,13 +13,15 @@ export function TypingIndicator() {
     );
 }
 
-/** Área de mensajes #messages-list. */
+/** Área de mensajes #messages-list. `children` es el formulario de auth (RF-02). */
 export function MessageList({
     messages,
     typing,
+    children,
 }: {
     messages: ChatMessage[];
     typing: boolean;
+    children?: ReactNode;
 }) {
     return (
         <div className="messages-area" id="messages-list" role="log" aria-live="polite">
@@ -26,6 +29,7 @@ export function MessageList({
                 <MessageBubble key={m.id} message={m} />
             ))}
             {typing && <TypingIndicator />}
+            {children}
         </div>
     );
 }
