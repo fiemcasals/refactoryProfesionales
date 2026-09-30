@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-30T10:52:50.227Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-30T11:20:30.989Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -12,10 +12,10 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 | 4 | RF-03 | Preparar la máquina de producción con dominio, certificado y backups | RO-01 | — | — | Hacer | dev | — | — |
 | 5 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
 | 6 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06, RF-01 | — |
-| 7 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
-| 8 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | dev | RF-04, RF-06 | — |
-| 9 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-04, RF-05, RF-06 | — |
-| 10 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | dev | RF-02, RF-03, RF-06 | — |
+| 7 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-06 | — |
+| 8 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06 | — |
+| 9 | RNF-01 | Ocultamiento y visibilidad toggle en campos de contraseña | HU-01 | — | — | Hacer | dev | RF-02, RF-03, RF-06 | — |
+| 10 | RF-05 | Notificación y control de correo duplicado | HU-01 | login plus | — | Hacer | dev | RF-04, RF-06 | — |
 
 ## Detalle
 
@@ -61,14 +61,14 @@ Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, c
 ### RF-02 — Autenticación de usuarios (Inicio de Sesión)
 - Estimado: 5h
 
-### RF-04 — Validación de coincidencia de contraseñas
-- Estimado: 5h
-
-### RF-05 — Notificación y control de correo duplicado
-- Estimado: 5h
-
 ### RF-03 — Registro de usuarios con perfil prestador de servicios
 - Estimado: 5h
 
+### RF-04 — Validación de coincidencia de contraseñas
+- Estimado: 5h
+
 ### RNF-01 — Ocultamiento y visibilidad toggle en campos de contraseña
+- Estimado: 5h
+
+### RF-05 — Notificación y control de correo duplicado
 - Estimado: 5h
