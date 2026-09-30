@@ -146,4 +146,33 @@ describe('RF-02 frontend', () => {
         );
         expect(botones()).toHaveLength(0);
     });
+
+    test('fix: logearse con los botones a la vista tambien los retira', async () => {
+        mockFetchOnce(200, { token: 'abc123', email: 'qa@profesionales.local' });
+        const { email, password } = await abrirFormulario();
+        const botones = () =>
+            [...document.querySelectorAll('#options-container button')] as HTMLButtonElement[];
+        const decir = (texto: string) => {
+            const input = document.querySelector('#chat-input') as HTMLInputElement;
+            const form = document.querySelector('#chat-form') as HTMLFormElement;
+            fireEvent.change(input, { target: { value: texto } });
+            fireEvent.submit(form);
+        };
+
+        // Con el formulario abierto, mandar "hola" repone los botones (pre-login).
+        decir('hola');
+        await waitFor(() => expect(botones()).toHaveLength(2), { timeout: 3000 });
+        expect(document.querySelector('#login-form')).not.toBeNull();
+
+        // Al confirmar el login se retiran formulario Y botones.
+        fireEvent.change(email, { target: { value: 'qa@profesionales.local' } });
+        fireEvent.change(password, { target: { value: 'Profesionales123' } });
+        const form = document.querySelector('#login-form') as HTMLFormElement;
+        fireEvent.submit(form);
+        await screen.findByText(/Sesión iniciada como qa@profesionales\.local\./, undefined, {
+            timeout: 3000,
+        });
+        expect(document.querySelector('#login-form')).toBeNull();
+        expect(botones()).toHaveLength(0);
+    });
 });

@@ -64,6 +64,9 @@ export function useChat() {
     const confirmLogin = useCallback(
         (email: string) => {
             setLoginFormVisible(false);
+            // Si entre abrir el formulario y logearse se mandó un texto,
+            // las rutas pueden haber repuesto los botones: también se retiran.
+            setOptionsVisible(false);
             setSessionEmail(email);
             push({ sender: SENDER_BOT, isUser: false, text: `Sesión iniciada como ${email}.` });
         },
