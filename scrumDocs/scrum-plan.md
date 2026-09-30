@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-30T11:20:44.487Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-30T12:56:27.300Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -10,7 +10,7 @@ Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada f
 | 2 | RF-01 | Levantar el entorno local de dev con CORS para la app de Scrum | RO-01 | — | — | Hacer | dev | — | — |
 | 3 | RF-02 | Levantar el entorno local de testing con CORS para la app de Scrum | RO-01 | — | — | Hacer | dev | — | — |
 | 4 | RF-03 | Preparar la máquina de producción con dominio, certificado y backups | RO-01 | — | — | Hacer | dev | — | — |
-| 5 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Hacer | dev | RF-01 | — |
+| 5 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | Haciendo | dev | RF-01 | — |
 | 6 | RF-02 | Autenticación de usuarios (Inicio de Sesión) | HU-01 | — | — | Hacer | dev | RF-01, RF-06, RF-01 | — |
 | 7 | RF-03 | Registro de usuarios con perfil prestador de servicios | HU-01 | — | — | Hacer | dev | RF-06 | — |
 | 8 | RF-04 | Validación de coincidencia de contraseñas | HU-01 | — | — | Hacer | dev | RF-01, RF-06, RF-03 | — |
@@ -56,6 +56,7 @@ Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, c
 - Estimado: 8h
 
 ### RF-06 — Reimplementar la interfaz de chat y bienvenida sobre React + Vite
+Inicio de desarrollo del requerimiento
 - Estimado: 8h
 
 ### RF-02 — Autenticación de usuarios (Inicio de Sesión)
