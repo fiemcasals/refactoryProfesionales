@@ -100,4 +100,50 @@ describe('RF-02 frontend', () => {
         expect(document.querySelector('#login-form')).not.toBeNull();
         expect(screen.queryByText(/Sesión iniciada como/)).toBeNull();
     });
+
+    test('fix: con sesion activa, mandar texto no repone los botones', async () => {
+        mockFetchOnce(200, { token: 'abc123', email: 'qa@profesionales.local' });
+        const { email, password } = await abrirFormulario();
+        fireEvent.change(email, { target: { value: 'qa@profesionales.local' } });
+        fireEvent.change(password, { target: { value: 'Profesionales123' } });
+        enviar();
+        await screen.findByText(/Sesión iniciada como qa@profesionales\.local\./, undefined, {
+            timeout: 3000,
+        });
+
+        const botones = () =>
+            [...document.querySelectorAll('#options-container button')] as HTMLButtonElement[];
+        const mensajes = () =>
+            [...document.querySelectorAll('.chat-message.bot .message-bubble')].map(
+                (el) => (el.textContent ?? '').trim(),
+            );
+
+        // Saludo post-login: responde sin reponer botones.
+        const decir = (texto: string) => {
+            const input = document.querySelector('#chat-input') as HTMLInputElement;
+            const form = document.querySelector('#chat-form') as HTMLFormElement;
+            fireEvent.change(input, { target: { value: texto } });
+            fireEvent.submit(form);
+        };
+        decir('hola');
+        await waitFor(
+            () =>
+                expect(
+                    mensajes().some((t) => t.includes('Ya iniciaste sesión como')),
+                ).toBe(true),
+            { timeout: 3000 },
+        );
+        expect(botones()).toHaveLength(0);
+
+        // Texto genérico post-login: tampoco repone botones.
+        decir('quiero sacar un turno');
+        await waitFor(
+            () =>
+                expect(
+                    mensajes().filter((t) => t.includes('Ya iniciaste sesión como')).length,
+                ).toBeGreaterThanOrEqual(2),
+            { timeout: 3000 },
+        );
+        expect(botones()).toHaveLength(0);
+    });
 });

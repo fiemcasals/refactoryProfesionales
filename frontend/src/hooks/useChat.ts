@@ -29,6 +29,8 @@ export function useChat() {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [optionsVisible, setOptionsVisible] = useState(false);
     const [typing, setTyping] = useState(false);
+    /** RF-02: email de la sesión activa, o null si no hay. */
+    const [sessionEmail, setSessionEmail] = useState<string | null>(null);
     /** RF-02: el formulario de login vive dentro del chat. */
     const [loginFormVisible, setLoginFormVisible] = useState(false);
     const idRef = useRef(0);
@@ -62,6 +64,7 @@ export function useChat() {
     const confirmLogin = useCallback(
         (email: string) => {
             setLoginFormVisible(false);
+            setSessionEmail(email);
             push({ sender: SENDER_BOT, isUser: false, text: `Sesión iniciada como ${email}.` });
         },
         [push],
@@ -108,6 +111,25 @@ export function useChat() {
             setTyping(true);
             later(() => {
                 setTyping(false);
+                // Con sesión activa no se reponen los botones: ya no tiene
+                // sentido ofrecer Iniciar Sesión / Registrarse (fix reportado
+                // en testeo manual de RF-02).
+                if (sessionEmail !== null) {
+                    if (routeText(userText) === 'greeting') {
+                        push({
+                            sender: SENDER_BOT,
+                            isUser: false,
+                            text: `¡Hola! Ya iniciaste sesión como ${sessionEmail}.`,
+                        });
+                    } else {
+                        push({
+                            sender: SENDER_BOT,
+                            isUser: false,
+                            text: `Ya iniciaste sesión como ${sessionEmail}.`,
+                        });
+                    }
+                    return;
+                }
                 const route = routeText(userText);
                 if (route === 'greeting') {
                     push({ sender: SENDER_BOT, isUser: false, text: BOT_GREETING });
@@ -122,7 +144,7 @@ export function useChat() {
                 }
             }, TEXT_DELAY);
         },
-        [push, runOptionFlow, later],
+        [push, runOptionFlow, later, sessionEmail],
     );
 
     // Bienvenida automática al montar.
