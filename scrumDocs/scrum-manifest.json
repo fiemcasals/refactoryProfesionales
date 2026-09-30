@@ -1,6 +1,6 @@
 {
   "projectId": "PROJ-1785509638361",
-  "lastSyncAt": "2026-09-30T13:02:46.149Z",
+  "lastSyncAt": "2026-09-30T14:41:05.956Z",
   "mappings": [
     {
       "requirementId": "REQ-1785771199977",
@@ -44,12 +44,6 @@
       "testIds": []
     },
     {
-      "requirementId": "REQ-1785771214294",
-      "code": "RF-02",
-      "sourceRef": "docs/REQUERIMIENTOS.md#RF-02",
-      "testIds": []
-    },
-    {
       "requirementId": "REQ-1785771214595",
       "code": "RNF-01",
       "sourceRef": "docs/REQUERIMIENTOS.md#RNF-01",
@@ -80,6 +74,27 @@
         "TEST-1790685849918-17",
         "TEST-1790685849919-18",
         "TEST-1790685849920-19"
+      ]
+    },
+    {
+      "requirementId": "REQ-1785771214294",
+      "code": "RF-02",
+      "sourceRef": "scrumDocs/entregas/RF-02.md",
+      "testIds": [
+        "TEST-1790687803944-0",
+        "TEST-1790687803951-1",
+        "TEST-1790687803955-2",
+        "TEST-1790687803958-3",
+        "TEST-1790687803960-4",
+        "TEST-1790687803961-5",
+        "TEST-1790687803963-6",
+        "TEST-1790687803966-7",
+        "TEST-1790687803969-8",
+        "TEST-1790687803973-9",
+        "TEST-1790687803977-10",
+        "TEST-1790687803978-11",
+        "TEST-1790687803980-12",
+        "TEST-1790687803984-13"
       ]
     }
   ]
