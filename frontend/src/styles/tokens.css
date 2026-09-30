@@ -1,0 +1,44 @@
+/* Design Tokens — portados de docs/style.md (RF-01 criterio 8). */
+:root {
+    /* Color Palette */
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-active: #1e40af;
+    --primary-light: #eff6ff;
+    --primary-border: #bfdbfe;
+    
+    /* Dark Banner & Neutrals */
+    --slate-900: #0f172a;
+    --slate-800: #1e293b;
+    --slate-700: #334155;
+    --slate-600: #475569;
+    --slate-400: #94a3b8;
+    --slate-200: #e2e8f0;
+    --slate-100: #f1f5f9;
+    --slate-50: #f8fafc;
+    
+    /* Semantic Colors */
+    --success: #16a34a;
+    --success-bg: #f0fdf4;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --danger: #dc2626;
+    --danger-bg: #fef2f2;
+
+    /* Radii Tokens */
+    --radius-bubble: 20px;
+    --radius-card: 14px;
+    --radius-pill: 24px;
+    --radius-sm: 8px;
+
+    /* Shadows & Effects */
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.12), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
+    --shadow-lg: 0 12px 24px -4px rgba(37, 99, 235, 0.18), 0 4px 8px -2px rgba(15, 23, 42, 0.08);
+    --shadow-glow: 0 0 16px rgba(37, 99, 235, 0.35);
+
+    /* Transitions */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
