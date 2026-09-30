@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-30T10:49:22.098Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-30T10:51:12.588Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
