@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-30T13:54:14.890Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-09-30T13:56:11.902Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -56,7 +56,33 @@ Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, c
 - Estimado: 8h
 
 ### RF-06 — Reimplementar la interfaz de chat y bienvenida sobre React + Vite
-Inicio de desarrollo del requerimiento
+Entrega de RF-06: la interfaz de RF-01 reescrita como aplicacion React + TypeScript construida con Vite, con el mismo comportamiento, textos, tiempos e ids del DOM. Sienta la estructura de monorepo (frontend/). Reemplaza la implementacion estatica sin tocarla.
+
+| Condicion de aprobacion | Cubierta | Como se prueba |
+|---|---|---|
+| 1. Al cargar la raiz se renderiza la interfaz completa (marca Profesionales, Asistente en linea, #messages-list, #options-container, #chat-input) | si | test criterio 1 (Testing Library) + RF-06.sh chequea GET / y assets compilados |
+| 2. Bienvenida del asistente dentro de los 3000 ms | si | test criterio 2: cronometra el tiempo real hasta que aparece el texto |
+| 3. Exactamente dos botones type=button, sin numero de opcion ni texto obligatorio | si | test criterio 3: cuenta botones, chequea type, y que no existan input[type=number], select ni inputs en #options-container |
+| 4. Iniciar Sesion responde en menos de 2000 ms y retira los botones | si | test criterio 4: click real + cronometro |
+| 5. Registrarse responde en menos de 2000 ms y retira los botones | si | test criterio 5: click real + cronometro |
+| 6. El texto libre enruta los 4 casos y siempre vacia #chat-input | si | test criterio 6: los 4 casos en la misma sesion, verifica el valor del campo en cada uno |
+| 7. El texto del usuario se muestra literal y no ejecuta HTML | si | test criterio 7: inyecta img onerror + script; React lo escapa por construccion, sin sanitize manual |
+| 8. La interfaz aplica docs/style.md (Inter, #2563eb, 48px, 0.15s/0.22s) | si | test criterio 8: lee frontend/index.html, tokens.css y chat.css |
+| 9. cd frontend && npm run build compila sin errores | si | el propio RF-06.sh: tsc -b + vite build, built in 99ms |
+| 10. cd frontend && npm test en verde, un test por condicion | si | Vitest: Test Files 1 passed, Tests 8 passed, Duration 9.46s |
+
+Las 10 estan cubiertas. 10/10.
+
+Componentes: ChatHeader, MessageList, MessageBubble, OptionsBar, ChatForm. Estado en useChat, enrutado en routing.ts como funcion pura. Estilos: tokens.css con las variables de docs/style.md y chat.css con el resto, portados verbatim.
+Sin StrictMode a proposito: el flujo de bienvenida corre por timers y el doble-montaje duplicaria el saludo. Anotado en main.tsx y en el documento.
+
+Suite del repo: cd frontend && npm test, 8 tests con Vitest + Testing Library, 8/8 en verde. La app no tenia framework de frontend; se sumo Vitest como devDependency de frontend/.
+Entrega: scrumDocs/entregas/RF-06.md (documento) y RF-06.sh (compila, sirve dist/, verifica recursos, corre la suite, con --carga N). RF-06.sh cierra con exit 0; con --carga 20: 20/20 respuestas 200, 2 ms promedio, 4 ms peor.
+Tests de la app: 20 (10 condiciones x 2 etapas). 10 de desarrollo en Aprobado con evidence de la corrida real, 10 de integracion en Pendiente a proposito: en esta rama no hay integracion que probar. Los 20 tienen bloque verification con endpointUrl, notes y steps.
+
+Quedo afuera: backend Django y login/registro reales (RF-02 y RF-03). No hay backend/ todavia; se crea en RF-02. Los archivos estaticos de la raiz (index.html, app.js, styles.css) quedan intactos a proposito: RF-01 esta en produccion y su test de humo los pide. Pruebas en navegador real: la suite corre sobre jsdom. CORS: sin tocar, es de los operacionales de RO-01.
+
+Rama: feature/general/req-1790685849827-reimplementar-la-interfaz-de-chat-y-bien, commit 97dc513, PR #2 abierto hacia dev. Alcance verificado: 1 commit propio, 30 archivos, todos de RF-06; interseccion con dev vacia.
 - Estimado: 8h
 
 ### RF-02 — Autenticación de usuarios (Inicio de Sesión)
