@@ -1,13 +1,13 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-09-30T14:24:04.578Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-10-05T13:48:56.781Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
 | Orden | Código | Requerimiento | Historia de Usuario | Módulo | Entrega | Estado | Desarrollador | Depende de | Rechazos |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | RF-01 | Interfaz gráfica de chat y bienvenida | HU-01 | — | — | production ✓✓ | dev | — | — |
-| 2 | RF-01 | Levantar el entorno local de dev con CORS para la app de Scrum | RO-01 | — | — | Hacer | dev | — | — |
+| 2 | RF-01 | Levantar el entorno local de dev con CORS para la app de Scrum | RO-01 | — | — | Haciendo | dev | — | — |
 | 3 | RF-02 | Levantar el entorno local de testing con CORS para la app de Scrum | RO-01 | — | — | Hacer | dev | — | — |
 | 4 | RF-03 | Preparar la máquina de producción con dominio, certificado y backups | RO-01 | — | — | Hacer | dev | — | — |
 | 5 | RF-06 | Reimplementar la interfaz de chat y bienvenida sobre React + Vite | HU-01 | — | — | production ✓✓ | dev | RF-01 | — |
