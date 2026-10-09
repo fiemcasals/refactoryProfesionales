@@ -1,6 +1,6 @@
 # Plan de Requerimientos — Profesionales
 
-_Generado automáticamente el 2026-10-05T13:48:56.781Z — no editar a mano, se sobreescribe en cada publicación._
+_Generado automáticamente el 2026-10-09T14:39:36.228Z — no editar a mano, se sobreescribe en cada publicación._
 
 Orden sugerido de desarrollo (respeta dependencias entre Requerimientos). Cada fila indica de qué Requerimientos depende, si tiene.
 
@@ -47,6 +47,7 @@ Rama: feature/general/req-1785771199977-interfaz-grafica-de-chat-y-bienvenida, c
 - Estimado: 5h
 
 ### RF-01 — Levantar el entorno local de dev con CORS para la app de Scrum
+Inicio de desarrollo del requerimiento
 - Estimado: 4h
 
 ### RF-02 — Levantar el entorno local de testing con CORS para la app de Scrum
